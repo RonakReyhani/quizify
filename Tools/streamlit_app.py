@@ -35,7 +35,7 @@ def download(url):
 st.title("Self Service Quiz Generator platform")
 st.divider()
 st.header("Introduction")
-st.markdown("The 'Self Service Quiz Generator platform' is an innovative app designed to revolutionize your learning experience. With this powerful tool, users can effortlessly generate custom quizzes based on any PDF file they download from the web.\nGone are the days of tedious manual summarization and translation! Our app leverages the cutting-edge capabilities of Hugging Face transformers to simplify the entire process. Once you've obtained a PDF, simply import it into the app and watch as the magic unfolds.")
+st.markdown("The `Self Service Quiz Generator platform` is an innovative app designed to revolutionize your learning experience. With this powerful tool, users can effortlessly generate custom quizzes based on any PDF file they download from the web.\nGone are the days of tedious manual summarization and translation! Our app leverages the cutting-edge capabilities of Hugging Face transformers to simplify the entire process. Once you've obtained a PDF, simply import it into the app and watch as the magic unfolds.")
 st.markdown("The Self Service Quiz Generator platform empowers you to summarize the document with ease, condensing its key points into a concise format. Not only that, but our app also offers built-in translation functionality, allowing you to understand the content in your preferred language.\n But the true power of our app lies in its ability to transform your summarized and translated document into an interactive multi-choice quiz.")
 st.markdown("By analyzing the text and extracting relevant information, the app generates thought-provoking questions that test your understanding of the material.\n Whether you're a student striving for academic excellence or a professional looking to enhance your knowledge, the Self Service Quiz Generator platform is your go-to tool for efficient and engaging learning. Experience the convenience, accuracy, and effectiveness of our app today and take your learning journey to new heights.")
 st.divider()
@@ -46,8 +46,8 @@ def set_clicked():
 
 # Enter URL or upload file
 st.header("Downloader, Uploader Service")
-st.markdown("To get started, you either need to upload the file or provide a valid url for your pdf resource.")
-st.markdown("In this step, if you enter a URL Hugging Face Agent behind the scene will download the file. download file is a custom tool called `download_file_tool`.")
+st.markdown("To begin, you have two options: either upload the file directly or provide a valid URL for your PDF resource.")
+st.markdown("If you choose to enter a URL, our advanced Hugging Face Agent will seamlessly download the file for you. This process utilizes a specialized tool known as the `download_file_tool` working silently behind the scenes to retrieve the document.")
 url = st.empty()
 url = st.text_input('Enter a valid URL:')
 
