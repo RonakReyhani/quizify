@@ -25,16 +25,17 @@ import readPDF as fileReader
 token = st.secrets["hugging_face_token"]
 login(token)
 
+intoroduction = ""
 
 tools = [downloader.download_file_tool,fileReader.read_file_tool]
 agent = HfAgent("https://api-inference.huggingface.co/models/bigcode/starcoder",additional_tools=tools)
 def download(url):
     return agent.run(f"Download file from the web {url}", url=url)
 
-st.title("Self Service Intelligent Quiz Generator platform")
+st.title("Self Service Quiz Generator platform")
 st.divider()
 st.header("Introduction")
-st.markdown("some introductions about the app")
+st.markdown("the 'Self Service Quiz Generator platform' is an innovative app designed to revolutionize your learning experience. With this powerful tool, users can effortlessly generate custom quizzes based on any PDF file they download from the web.\nGone are the days of tedious manual summarization and translation! Our app leverages the cutting-edge capabilities of Hugging Face transformers to simplify the entire process. Once you've obtained a PDF, simply import it into the app and watch as the magic unfolds.\nThe Self Service Quiz Generator platform empowers you to summarize the document with ease, condensing its key points into a concise format. Not only that, but our app also offers built-in translation functionality, allowing you to understand the content in your preferred language.\n But the true power of our app lies in its ability to transform your summarized and translated document into an interactive multi-choice quiz. By analyzing the text and extracting relevant information, the app generates thought-provoking questions that test your understanding of the material.\n Whether you're a student striving for academic excellence or a professional looking to enhance your knowledge, the Self Service Quiz Generator platform is your go-to tool for efficient and engaging learning. Experience the convenience, accuracy, and effectiveness of our app today and take your learning journey to new heights.")
 st.divider()
 if 'clicked' not in st.session_state:
     st.session_state.clicked = False
