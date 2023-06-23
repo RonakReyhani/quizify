@@ -2,8 +2,8 @@ from huggingface_hub import login
 from transformers import HfAgent
 import pandas as pd
 import streamlit as st
-import Tools.downloader as downloader
-import Tools.readPDF as fileReader
+import downloader as downloader
+import readPDF as fileReader
 
 # manage secret
 # Deployment
