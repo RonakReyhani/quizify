@@ -48,6 +48,7 @@ def set_clicked():
 st.header("Downloader, Uploader Service")
 st.markdown("To begin, you have two options: either upload the file directly or provide a valid URL for your PDF resource.")
 st.markdown("If you choose to enter a URL, our advanced Hugging Face Agent will seamlessly download the file for you. This process utilizes a specialized tool known as the `download_file_tool` working silently behind the scenes to retrieve the document.")
+st.markdown("Currently, our platform exclusively supports PDF files at this stage.")
 url = st.empty()
 url = st.text_input('Enter a valid URL:')
 
@@ -70,7 +71,7 @@ with col4:
    if url and button and st.session_state.clicked:
         download(url)
 
-st.markdown("Alternatively, You can choose to upload your pdf file, the agent will read the document with a custom tool called `read_file_tool` and saves the file.")
+st.markdown("As an alternative, you have the option to upload your PDF file. Our agent will utilize a specialized tool called `read_file_tool` to process and extract the content from the document. The extracted information will be saved for further use within the platform.")
 #  On file Upload
 uploaded_file = st.file_uploader("Choose a file", type=['pdf'])
 if uploaded_file is not None:
@@ -82,14 +83,14 @@ if uploaded_file is not None:
 st.divider()
 
 st.header("Summarization Service")
-st.markdown("And now, the fun gets started! How about downloading a summarization on your uploaded document or the web content? lets get started.")
+st.markdown("And now, let the fun begin! Get ready to dive into the exciting features of our app. How about downloading a summarization of your uploaded document or web content? Let's embark on this thrilling journey together!")
 
-st.markdown("On click `summarize` button bellow, the Hugging face agent will summarize your document. The summarization model is the agent default tool. so please do not expect too much! yeah if your document is too large, it might behave funny and give up on reading!")
+st.markdown("By clicking the `summarize` button below, the Hugging Face agent will generate a summary of your document. Please note that the summarization model used by the agent is the default tool, so the results may not be perfect. If your document is excessively large, there is a chance it may encounter difficulties or exhibit unexpected behavior while processing.")
 st.button("SUMMARIZE")
-st.markdown("And hey! I have not forgotten about that, yeah you might want to download the summary. so go ahead and click the button.")
+st.markdown("And hey, I haven't forgotten about that! You might be eager to download the summary, so go ahead and click the button to access it.")
 st.button("DOWNLOAD SUMMARY")
 st.divider()
-st.markdown("Hmmm, Maybe like me, English is your second language? don't worry I have gotten your back ;). With this tool you can between `Italian`, `French` and `Spanish` languages and the the summary translated to your language")
+st.markdown("Hmmm, perhaps English is your second language, just like mine! But don't worry, I've got your back 😉. With this tool, you can select between `Italian`, `French`, and `Spanish` languages. Not only that, but you can also have the summary translated into your preferred language for better understanding.")
 
 option = st.selectbox(
     "Which language would you like it to be translated?",
@@ -101,11 +102,11 @@ st.divider()
 
 st.header("Quiz Generator Service")
 
-st.markdown("Did you study through? Ok! So that means you are ready hey? Let's ask our hugging face agent to generate some multiple choice questions for you!")
-st.markdown("You can choose which Language you want to be examine against!, you can select the number of questions in your requested exam.")
+st.markdown("Have you studied the summary carefully? Great! That means you're ready, right? Now, let's ask our Hugging Face agent to generate some engaging multiple-choice questions for you! Get ready to put your knowledge to the test!")
+st.markdown("You have the freedom to choose the language in which you want to be examined! Simply select your desired language option. Additionally, you can specify the number of questions you would like in your requested exam. Tailor the examination experience according to your preferences!")
 
-st.markdown("Once the agent has these information, it would ask another custom tool called  `quiz_generator_tool` to generate the quiz for you.")
-st.markdown("Just a reminder, once you click on generate exam, all the following steps would be presented in your selected language. for instance, you would be able to listen to the question in language of your choice. and obviously the question text is translated to your language.")
+st.markdown("Once the agent has gathered this information, it will utilize another specialized tool called `quiz_generator_tool` to generate the quiz for you. This tool is specifically designed to create dynamic and engaging quizzes based on your selected preferences. Sit back and let the quiz generation process unfold!")
+st.markdown("Just a friendly reminder, once you click on `Generate Exam`, all subsequent steps will be presented in your selected language. For instance, you will have the option to listen to the question in the language of your choice. Furthermore, the question text will be translated into your preferred language for seamless comprehension. Enjoy the convenience of experiencing the entire exam process in your own language!")
 
 exam_language= st.selectbox(
     "Generate exam in: ",
