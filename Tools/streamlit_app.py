@@ -6,25 +6,7 @@ import downloader as downloader
 import readPDF as fileReader
 import bertSummarizer_tool as summarizer
 
-# manage secret -Done
-# Deployment- Done
-# summarizer- Done
-# exam generator - in progress
-# show the multiple choice with pagination - the ui bit
-# read the question for me - voice service
-# generate score -
-# show my results
-# chart for score after multiple times as a comparison on the same document.
-# check how to create multi page app
-# styling
-# Deployment
-# blog post
-# Submit the form
-
-
 # Custom tools
-
-
 
 def get_pdf_content(file_name):
     return agent.run(f"Read the pdf file content {file_name}", file_name=file_name)
@@ -137,11 +119,21 @@ st.markdown(
 st.markdown(
     "By clicking the `summarize` button below, the Hugging Face agent will generate a summary of your document. Please note that the summarization model used by the agent is the default tool, so the results may not be perfect. If your document is excessively large, there is a chance it may encounter difficulties or exhibit unexpected behavior while processing."
 )
-st.button("SUMMARIZE")
 st.markdown(
     "And hey, I haven't forgotten about that! You might be eager to download the summary, so go ahead and click the button to access it."
 )
-st.button("DOWNLOAD SUMMARY")
+
+col1, col2, col3, col4 = st.columns([0.4, 0.2, 0.3, 0.3])
+with col1:
+    pass
+with col2:
+    pass
+with col3:
+    summarise_button = st.button("Summarize")
+with col4:
+    download_summary_button = st.button("Download Summary", on_click=set_clicked)
+    if url and button and session_state.clicked:
+        session_state.file_name = result
 st.divider()
 
 # --------------------------------------- Translate the content -----------------------------------------#
