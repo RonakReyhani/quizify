@@ -195,7 +195,6 @@ traitlets==5.9.0
 traits==6.3.2
 transformers==4.29.2
 typer==0.7.0
-typing_extensions @ file:///private/tmp/python-typing-extensions-20230602-7526-etcnat/typing_extensions-4.6.3/dist/typing_extensions-4.6.3-py3-none-any.whl
 tzdata==2023.3
 tzlocal==4.3
 Unidecode==1.3.6
