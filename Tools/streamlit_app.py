@@ -104,7 +104,6 @@ with col3:
 with col4:
     download_file = st.button(
         label="Download PDF",
-        mime="text/pdf",
         disabled=not session_state.download_file_ready,
     )
     if url and upload_file_url and session_state.download_file_ready:
@@ -146,11 +145,11 @@ with col3:
     summarise_button = st.button("Summarize", on_click=set_summarised_clicked)
 with col4:
     download_summary_button = st.button(
-        "Download Summary", disabled=not session_state.set_summarised_clicked,
-        on_click= downloader()
+        "Download Summary",
+        disabled=not session_state.set_summarised_clicked,
+        on_click=downloader(),
     )
     if url and download_summary_button and session_state.set_summarised_clicked:
-
         session_state.file_name = result
 st.divider()
 
