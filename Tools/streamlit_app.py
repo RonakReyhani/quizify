@@ -144,12 +144,12 @@ with col4:
     btn = st.download_button(
         label="DOWNLOAD FILE", data="pdf", file_name=url, mime="text/pdf"
     )
-    download_summary_button = st.button(
-        "Download Summary",
-        disabled=not session_state.summarised_clicked,
-        on_click=downloader(),
-    )
-    if url and download_summary_button and session_state.summarised_clicked:
+    # download_summary_button = st.button(
+    #     "Download Summary",
+    #     disabled=not session_state.summarised_clicked,
+    #     on_click=downloader(),
+    # )
+    if url and btn and session_state.summarised_clicked:
         session_state.file_name = result
 st.divider()
 
