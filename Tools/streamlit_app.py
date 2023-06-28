@@ -97,9 +97,12 @@ with col2:
 with col3:
     upload_file_url = st.button("Upload From Web", on_click=set_clicked_upload_file)
 with col4:
-    download_file = st.button(
-        label="Download PDF",
-        disabled=not session_state.download_file_ready,
+    # download_file = st.button(
+    #     label="Download PDF",
+    #     disabled=not session_state.download_file_ready,
+    # )
+    download_file = st.download_button(
+        label="DOWNLOAD FILE", data="pdf", file_name=url, mime="text/pdf"
     )
     if url and download_file and session_state.download_file_ready:
         result = download(url)
