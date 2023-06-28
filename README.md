@@ -33,6 +33,10 @@ We haven't forgotten about that! You might be eager to download the summary, so 
 
 Hmmm, perhaps English is your second language, just like mine! But don't worry, I've got your back 😉. With this tool, you can select between `Italian`, `French`, and `Spanish` languages. Not only that, but you can also have the summary translated into your preferred language for better understanding.
 
+### Text-To-Speech Service
+
+In addition to all we mentioned so far, if you are keen to listen to the summary or the original uploaded content, in this platform you will be able to generate audio from the file.
+
 ### Quiz Generator Service
 
 Have you studied the summary carefully? Great! That means you're ready, right? Now, let's ask our Hugging Face agent to generate some engaging multiple-choice questions for you! Get ready to put your knowledge to the test!
