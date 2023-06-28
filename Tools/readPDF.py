@@ -1,25 +1,31 @@
 import fitz
 from transformers import Tool
 
+# def read_pdf(filename):
+#     context = ""
+#     # Open the PDF file
+#     with fitz.open(f"{filename}") as pdf_file:
+#         # Get the number of pages in the PDF file
+#         num_pages = pdf_file.page_count
 
-def read_pdf(filename):
-    context = ""
-    # Open the PDF file
-    with fitz.open(f"{filename}") as pdf_file:
-        # Get the number of pages in the PDF file
-        num_pages = pdf_file.page_count
+#         # Loop through each page in the PDF file
+#         for page_num in range(num_pages):
+#             # Get the current page
+#             page = pdf_file[page_num]
 
-        # Loop through each page in the PDF file
-        for page_num in range(num_pages):
-            # Get the current page
-            page = pdf_file[page_num]
+#             # Get the text from the current page
+#             page_text = page.get_text()
 
-            # Get the text from the current page
-            page_text = page.get_text()
+#             # Append the text to context
+#             context += page_text
+#     return context
 
-            # Append the text to context
-            context += page_text
-    return context
+
+def read_pdf(file_name):
+    doc = fitz.open(file_name)
+    for page in doc:
+        text = page.get_text()
+        return text
 
 
 class read_file(Tool):
