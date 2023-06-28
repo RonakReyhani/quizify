@@ -169,7 +169,7 @@ spacy-loggers==1.0.4
 speechbrain==0.5.14
 srsly==2.4.6
 stack-data==0.6.2
-streamlit==1.23.1
+streamlit==1.24.0
 summarizer==0.0.7
 sympy==1.12
 tenacity==8.2.2

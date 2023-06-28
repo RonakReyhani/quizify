@@ -8,8 +8,10 @@ import bertSummarizer_tool as summarizer
 
 # Custom tools
 
+
 def get_pdf_content(file_name):
     return agent.run(f"Read the pdf file content {file_name}", file_name=file_name)
+
 
 def summarize_file(file_name):
     return agent.run(f"Summarize the file {file_name}", file_name=file_name)
@@ -19,7 +21,7 @@ def translate_file(file_name):
     return agent
 
 
-#---------------------------- login to huggingface hub and set up---------------------#
+# ---------------------------- login to huggingface hub and set up---------------------#
 token = st.secrets["hugging_face_token"]
 login(token)
 
@@ -33,42 +35,52 @@ agent = HfAgent(
     additional_tools=tools,
 )
 
+
 def get_session_state():
     return st.session_state
 
+
 # Initialize session state
 session_state = get_session_state()
-if 'clicked' not in session_state:
-    session_state.clicked = False
-if 'file_name' not in session_state:
+if "download_file_ready" not in session_state:
+    session_state.download_file_ready = False
+if "summarised_clicked" not in session_state:
+    session_state.summarised_clicked = False
+if "file_name" not in session_state:
     session_state.file_name = None
-if 'file_content' not in session_state:
+if "file_content" not in session_state:
     session_state.file_content = None
-if 'file_translation' not in session_state:
+if "file_translation" not in session_state:
     session_state.file_translation = None
-if 'file_summary' not in session_state:
+if "file_summary" not in session_state:
     session_state.file_summary = None
-if 'file_voice' not in session_state:
+if "file_voice" not in session_state:
     session_state.file_voice = None
 
 
-#----------------------------------------------------- Page Components ------------------------------------#
-st.title("Self Service Quiz Generator platform")
+# --------------------------------------------------Helper functions---------------------------------#
+def set_clicked_upload_file():
+    session_state.download_file_ready = True
+
+
+def set_summarised_clicked():
+    session_state.summarised_clicked = True
+
+
+# ----------------------------------------------------- Page Components ------------------------------------#
+st.title("Empowering Self-Service Learning with Hugging Face Transformers")
 st.divider()
 st.header("Introduction")
 st.markdown(
-    "The `Self Service Quiz Generator platform` is an innovative app designed to revolutionize your learning experience. With this powerful tool, users can effortlessly generate custom quizzes based on any PDF file they download from the web.\nGone are the days of tedious manual summarization and translation! Our app leverages the cutting-edge capabilities of Hugging Face transformers to simplify the entire process. Once you've obtained a PDF, simply import it into the app and watch as the magic unfolds."
+    "The ` Self-Service Learning platform` is an innovative app designed to revolutionize your learning experience. With this powerful tool, users can effortlessly generate custom quizzes based on any PDF file they download from the web.\nGone are the days of tedious manual summarization and translation! Our app leverages the cutting-edge capabilities of Hugging Face transformers to simplify the entire process. Once you've obtained a PDF, simply import it into the app and watch as the magic unfolds."
 )
 st.markdown(
-    "The Self Service Quiz Generator platform empowers you to summarize the document with ease, condensing its key points into a concise format. Not only that, but our app also offers built-in translation functionality, allowing you to understand the content in your preferred language.\n But the true power of our app lies in its ability to transform your summarized and translated document into an interactive multi-choice quiz."
+    "The  Self-Service Learning platform empowers you to summarize the document with ease, condensing its key points into a concise format. Not only that, but our app also offers built-in translation functionality, allowing you to understand the content in your preferred language.\n But the true power of our app lies in its ability to transform your summarized and translated document into an interactive multi-choice quiz."
 )
 st.markdown(
     "By analyzing the text and extracting relevant information, the app generates thought-provoking questions that test your understanding of the material.\n Whether you're a student striving for academic excellence or a professional looking to enhance your knowledge, the Self Service Quiz Generator platform is your go-to tool for efficient and engaging learning. Experience the convenience, accuracy, and effectiveness of our app today and take your learning journey to new heights."
 )
 st.divider()
-
-def set_clicked():
-    session_state.clicked = True
 
 # --------------------------------------- Enter URL -----------------------------------------#
 st.header("Downloader, Uploader Service")
@@ -88,12 +100,14 @@ with col1:
 with col2:
     pass
 with col3:
-    btn = st.download_button(
-        label="DOWNLOAD PDF", data="pdf", file_name=url, mime="text/pdf"
-    )
+    upload_file_url = st.button("Upload From Web", on_click=set_clicked_upload_file)
 with col4:
-    button = st.button("Upload From Web", on_click=set_clicked)
-    if url and button and session_state.clicked:
+    download_file = st.button(
+        label="Download PDF",
+        mime="text/pdf",
+        disabled=not session_state.download_file_ready,
+    )
+    if url and upload_file_url and session_state.download_file_ready:
         result = agent.run(f"Download file from the web {url}", url=url)
         session_state.file_name = result
 
@@ -101,11 +115,11 @@ with col4:
 st.markdown(
     "As an alternative, you have the option to upload your PDF file. Our agent will utilize a specialized tool called `read_file_tool` to process and extract the content from the document. The extracted information will be saved for further use within the platform."
 )
-uploaded_file = st.file_uploader("Choose a file", type=["pdf"])
-if uploaded_file is not None:
+browse_upload_file = st.file_uploader("Choose a file", type=["pdf"])
+if browse_upload_file is not None:
     # # To read file as bytes:
-    bytes_data = uploaded_file.read()
-    file_name = uploaded_file.name
+    bytes_data = browse_upload_file.read()
+    file_name = browse_upload_file.name
     with open(file_name, "wb") as f:
         f.write(bytes_data)
 st.divider()
@@ -129,10 +143,14 @@ with col1:
 with col2:
     pass
 with col3:
-    summarise_button = st.button("Summarize")
+    summarise_button = st.button("Summarize", on_click=set_summarised_clicked)
 with col4:
-    download_summary_button = st.button("Download Summary", on_click=set_clicked)
-    if url and button and session_state.clicked:
+    download_summary_button = st.button(
+        "Download Summary", disabled=not session_state.set_summarised_clicked,
+        on_click= downloader()
+    )
+    if url and download_summary_button and session_state.set_summarised_clicked:
+
         session_state.file_name = result
 st.divider()
 
