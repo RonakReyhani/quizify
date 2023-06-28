@@ -99,6 +99,7 @@ with col4:
     )
     if url and upload_file_url and session_state.download_file_ready:
         result = agent.run(f"Download file from the web {url}", url=url)
+        session_state.download_file_ready = False
         session_state.file_name = result
 
 # --------------------------------------- Upload File -----------------------------------------#
