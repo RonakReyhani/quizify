@@ -101,6 +101,7 @@ with col4:
         result = agent.run(f"Download file from the web {url}", url=url)
         session_state.download_file_ready = False
         session_state.file_name = result
+        st.write("Your file downloaded successfully")
 
 # --------------------------------------- Upload File -----------------------------------------#
 st.markdown(
@@ -138,10 +139,10 @@ with col3:
 with col4:
     download_summary_button = st.button(
         "Download Summary",
-        disabled=not session_state.set_summarised_clicked,
+        disabled=not session_state.summarised_clicked,
         on_click=downloader(),
     )
-    if url and download_summary_button and session_state.set_summarised_clicked:
+    if url and download_summary_button and session_state.summarised_clicked:
         session_state.file_name = result
 st.divider()
 
