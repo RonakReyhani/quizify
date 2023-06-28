@@ -102,7 +102,7 @@ with col4:
     #     disabled=not session_state.download_file_ready,
     # )
     download_file = st.download_button(
-        label="DOWNLOAD FILE", data="pdf", file_name=url, mime="text/pdf"
+        label="DOWNLOAD FILE", data=url, file_name="original.pdf", mime="text/pdf"
     )
     if url and download_file and session_state.download_file_ready:
         result = download(url)
