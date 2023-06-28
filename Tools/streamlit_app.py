@@ -5,20 +5,9 @@ import streamlit as st
 import downloader as downloader
 import readPDF as fileReader
 import bertSummarizer_tool as summarizer
-
-# Custom tools
-
-
-def get_pdf_content(file_name):
-    return agent.run(f"Read the pdf file content {file_name}", file_name=file_name)
-
-
-def summarize_file(file_name):
-    return agent.run(f"Summarize the file {file_name}", file_name=file_name)
-
-
-def translate_file(file_name):
-    return agent
+import question_generator as quizzer
+import translator_tool as translator
+import audio_generator as speaker
 
 
 # ---------------------------- login to huggingface hub and set up---------------------#
@@ -29,6 +18,8 @@ tools = [
     downloader.download_file_tool,
     fileReader.read_file_tool,
     summarizer.summarizer_tool,
+    translator.translate_text_tool,
+    speaker.text_to_speech_tool,
 ]
 agent = HfAgent(
     "https://api-inference.huggingface.co/models/bigcode/starcoder",

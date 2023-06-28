@@ -7,7 +7,7 @@ This paper has been archived. For the latest technical content about this subjec
 
 
 # Step 2: Translate the summary
-def translate_text(text, target_lang, source_lang ="en",max_chunk_length=512):
+def translate_text(text, target_lang, source_lang="en", max_chunk_length=512):
     model_name = f"Helsinki-NLP/opus-mt-{source_lang}-{target_lang}"
     model = MarianMTModel.from_pretrained(model_name)
     tokenizer = MarianTokenizer.from_pretrained(model_name)
@@ -35,22 +35,22 @@ def translate_text(text, target_lang, source_lang ="en",max_chunk_length=512):
     return " ".join(translated_text)
 
 
-source_lang = "en"
-target_lang = "fr"
+# source_lang = "en"
+# target_lang = "fr"
 
-# Step 1: Translate the text
-translated_text = translate_text(text, source_lang, target_lang)
-print(translated_text)
+# # Step 1: Translate the text
+# translated_text = translate_text(text, source_lang, target_lang)
+# print(translated_text)
 
 
-class translated_my_text(Tool):
+class translate_my_text(Tool):
     name = "translate_text_tool"
     description = "This is a tool for translating a text file content. It takes two inputs, first the file content as text, then the target language. It translates the content and returns the result as text"
-    input = ["text"]
+    input = ["text", "text"]
     output = ["mp3", "audio"]
 
     def __call__(self, txt: str, target_lang: str):
         return translate_text(txt, target_lang)
 
 
-translate_text_tool = translated_text()
+translate_text_tool = translate_my_text()
