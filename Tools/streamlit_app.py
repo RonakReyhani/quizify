@@ -58,6 +58,10 @@ def set_summarised_clicked():
     session_state.summarised_clicked = True
 
 
+def download(url):
+    return agent.run(f"Download file from the web {url}", url=url)
+
+
 # ----------------------------------------------------- Page Components ------------------------------------#
 st.title("Empowering Self-Service Learning with Hugging Face Transformers")
 st.divider()
@@ -98,7 +102,7 @@ with col4:
         disabled=not session_state.download_file_ready,
     )
     if url and download_file and session_state.download_file_ready:
-        result = agent.run(f"Download file from the web {url}", url=url)
+        result = download(url)
         session_state.download_file_ready = False
         session_state.file_name = result
         st.write("Your file downloaded successfully")
@@ -137,6 +141,9 @@ with col2:
 with col3:
     summarise_button = st.button("Summarize", on_click=set_summarised_clicked)
 with col4:
+    btn = st.download_button(
+        label="DOWNLOAD FILE", data="pdf", file_name=url, mime="text/pdf"
+    )
     download_summary_button = st.button(
         "Download Summary",
         disabled=not session_state.summarised_clicked,
