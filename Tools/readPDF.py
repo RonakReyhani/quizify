@@ -22,13 +22,6 @@ def read_pdf(filename):
     return context
 
 
-# def read_pdf(file_name):
-#     doc = fitz.open(file_name)
-#     for page in doc:
-#         text = page.get_text()
-#         return text
-
-
 class read_file(Tool):
     name = "read_file_tool"
     description = "This is a tool for reading documents (pdf) from the disk. It takes an input named `file_name` which should be the name of the file containing the document (pdf). It reads the document and returns the content of the document as text."
