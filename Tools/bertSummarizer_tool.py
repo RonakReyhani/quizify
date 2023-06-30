@@ -2,6 +2,7 @@ from transformers import BartTokenizer, BartForConditionalGeneration
 from transformers import pipeline
 import re
 from transformers import Tool
+from readPDF import read_pdf
 
 # Function to remove noise from the summary
 def remove_noise(summary):
@@ -15,16 +16,16 @@ def remove_noise(summary):
     # Apply pattern matching to remove noise
     for pattern in patterns:
         summary = re.sub(pattern, "", summary)
-
     return summary.strip()
-# Step 1: Summarize the document
-def summarize_document(document):
+
+
+def summarize_document(file_content):
     tokenizer = BartTokenizer.from_pretrained("facebook/bart-large-cnn")
     model = BartForConditionalGeneration.from_pretrained("facebook/bart-large-cnn")
     summarizer = pipeline("summarization", model=model, tokenizer=tokenizer)
 
 # Split the document into sentences
-    sentences = document.split(".")
+    sentences = file_content.split(".")
     chunk_size = 512  # Adjust the chunk size as needed
     chunks = []
     chunk = ""
@@ -48,23 +49,14 @@ def summarize_document(document):
     final_summary = remove_noise(final_summary)
     return final_summary
 
-
 class summarize_service (Tool):
-  name="summarizer_tool"
-  description="This is a tool for summarizing text documents. It takes an input named `file_name`. It reads the document and returns the summarization of the document content as text."
-  input=['text']
-  output=['text']
-  def __call__(self, file_name: str):
-    return summarize_document(file_name)
+    name="summarizer_tool"
+    description="This is a tool for summarizing text documents. It takes an input named `file_content`. It reads the document and returns the summarization of the document content as text."
+    input=['text']
+    output=['text']
+    
+    def __call__(self, file_content: str):
+        return summarize_document(file_content)
 
 summarizer_tool =  summarize_service()
 
-
-# # Example usage
-# DOCUMENT = read_pdf("../documents/summarize.pdf")
-
-# # Step 1: Summarize the document without truncating sentences
-# summary = summarize_document(DOCUMENT)
-
-# # Print the result
-# print("Summary:", summary)
