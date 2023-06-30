@@ -4,11 +4,13 @@ A self service study platform powered by Generative AI, using Hugging face Trans
 
 ## Introduction
 
-The ` Self-Service Learning platform` is an innovative app designed to revolutionize your learning experience. With this powerful tool, users can effortlessly generate custom quizzes based on any PDF file they download from the web. Gone are the days of tedious manual summarization and translation! Our app leverages the cutting-edge capabilities of Hugging Face transformers to simplify the entire process. Once you've obtained a PDF, simply import it into the app and watch as the magic unfolds.
+The ` Self-Service Learning platform` can be converted to an innovative app designed to revolutionize your learning experience. With this powerful tool, users can effortlessly generate custom quizzes based on any PDF file they download from the web. Gone are the days of tedious manual summarization and translation! this potential application leverages the cutting-edge capabilities of Hugging Face transformers to simplify the entire process. Once you've obtained a PDF, simply import it into the app and watch as the magic unfolds.
 
 This learning platform empowers you to summarize the document with ease, condensing its key points into a concise format. Not only that, but our app also offers built-in translation functionality, allowing you to understand the content in your preferred language. But the true power of our app lies in its ability to transform your summarized and translated document into an interactive question-answer service.
 
 By analyzing the text and extracting relevant information, the app generates thought-provoking questions that test your understanding of the material. Whether you're a student striving for academic excellence or a professional looking to enhance your knowledge, the Self Service Quiz Generator platform is your go-to tool for efficient and engaging learning.
+
+As students, parents, or job seekers, we often encounter situations where we need to summarize a document promptly and prepare questions for ourselves or our children. This inspired the concept of a self-service platform. The platform allows users to upload documents or retrieve files from the internet, enabling them to summarize the content, translate it into their preferred language, and even generate questions based on the document.
 
 ## Sub Services
 
@@ -25,7 +27,7 @@ As an alternative, you have the option to upload your PDF file. Our agent will u
 
 let the fun begin! Get ready to dive into the exciting features of our app. How about downloading a summarization of your uploaded document or web content? Let's embark on this thrilling journey together!"
 
-By clicking the `summarize` button below, the Hugging Face agent will generate a summary of your document. Please note that the summarization model used by the agent is the default tool, so the results may not be perfect. If your document is excessively large, there is a chance it may encounter difficulties or exhibit unexpected behavior while processing.
+By clicking the `file_summarization_tool` button below, the Hugging Face agent will generate a summary of your document. Please note that the summarization model used by the agent is the default tool, so the results may not be perfect. If your document is excessively large, there is a chance it may encounter difficulties or exhibit unexpected behavior while processing.
 
 We haven't forgotten about that! You might be eager to download the summary, so go ahead and click the button to access it.
 
