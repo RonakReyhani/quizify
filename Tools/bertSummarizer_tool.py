@@ -51,7 +51,7 @@ def summarize_document(file_content):
 
 class summarize_service (Tool):
     name="summarizer_tool"
-    description="This is a tool for summarizing text documents. It takes an input named `file_content`. It reads the document and returns the summarization of the document content as text."
+    description="This is a tool for summarizing text documents. It takes an input named `file_content`. and returns the summarization of the content as text."
     input=['text']
     output=['text']
     

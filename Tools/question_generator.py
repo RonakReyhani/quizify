@@ -39,14 +39,9 @@ def generate_questions_with_answers(document, num_questions=10):
     return generated_pairs
 
 
-# for question, answer in generated_pairs:
-#     print("Question:", question)
-#     print("Answer:", answer)
-#     print()
-
 
 class question_generator(Tool):
-    name = "questtion_generator_tool"
+    name = "question_answer_generator_tool"
     description = "This is a tool for generating question and answers from a long document. It takes an input named `document` and an input named `numb_questions`,and returns a list of question and answer pairs."
     input = ["text", "int"]
     output = ["text"]
@@ -55,4 +50,4 @@ class question_generator(Tool):
         return generate_questions_with_answers(document, num_questions)
 
 
-question_generator_tool = question_generator()
+question_answer_generator_tool = question_generator()
