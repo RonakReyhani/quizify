@@ -6,7 +6,8 @@ def downloader(url):
   # NOTE the stream=True parameter below
   file_name = url.split('/')[-1]
   print(file_name)
-  with requests.get(url, stream=True) as r:
+  with requests.get(url, stream=True, allow_redirects=True) as r:
+      print(r.headers.get('content-type'))
       r.raise_for_status()
       with open(file_name, 'wb') as f:
           for chunk in r.iter_content(chunk_size=8192): 

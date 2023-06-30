@@ -79,7 +79,7 @@ def set_quiz_clicked():
 
 def download(url):
     file_name = agent.run(f"Download file from the web {url}", url=url)
-    session_state.upload_from_web_clicked = False
+    print("---fileName", file_name)
     session_state.file_name = file_name
 
 def read_content(file_name):
@@ -138,7 +138,7 @@ with col4:
     download_file = st.button(
         label="Download PDF",
         disabled=not session_state.upload_from_web_clicked,
-        on_click=download(session_state.upload_file_url)
+        on_click=download(url)
     )
     # download_file = st.download_button(
     #     label="DOWNLOAD FILE", data=url, file_name="original.pdf", mime="text/pdf"
