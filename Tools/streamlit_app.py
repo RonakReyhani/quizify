@@ -33,6 +33,8 @@ def get_session_state():
 
 # Initialize session state
 session_state = get_session_state()
+if "upload_file_url" not in session_state:
+    session_state.upload_file_url = False
 if "upload_from_web_clicked" not in session_state:
     session_state.upload_from_web_clicked = False
 if "summarised_clicked" not in session_state:
@@ -130,12 +132,12 @@ with col1:
 with col2:
     pass
 with col3:
-    upload_file_url = st.button("Upload From Web", on_click=set_upload_file_clicked)
+    session_state.upload_file_url = st.button("Upload From Web", on_click=set_upload_file_clicked)
 with col4:
     download_file = st.button(
         label="Download PDF",
         disabled=not session_state.upload_from_web_clicked,
-        on_click=download
+        on_click=download(session_state.upload_file_url)
     )
     # download_file = st.download_button(
     #     label="DOWNLOAD FILE", data=url, file_name="original.pdf", mime="text/pdf"
