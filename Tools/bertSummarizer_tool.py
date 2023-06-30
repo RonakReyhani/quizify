@@ -50,13 +50,13 @@ def summarize_document(file_content):
     return final_summary
 
 class summarize_service (Tool):
-    name="summarizer_tool"
-    description="This is a tool for summarizing text documents. It takes an input named `file_content`. and returns the summarization of the content as text."
+    name="file_summarization_tool"
+    description="This is a tool for summarizing content of the documents. It takes an input named `file_content`. and returns the summarization of the content as text."
     input=['text']
     output=['text']
     
     def __call__(self, file_content: str):
         return summarize_document(file_content)
 
-summarizer_tool =  summarize_service()
+file_summarization_tool =  summarize_service()
 

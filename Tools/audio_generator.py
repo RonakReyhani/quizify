@@ -14,12 +14,14 @@ def generate_voice(file_name,content, language):
     # Adjust the speed of the voice by manipulating the text duration
     summary_voice.speed = speed
     # Save the voice as an audio file
-    summary_voice.save(f"{file_name}.mp3")
+    audio_file_name = f"{file_name}.mp3"
+    summary_voice.save(audio_file_name)
+    return audio_file_name
 
 
 class text_to_speech(Tool):
     name = "text_to_speech_tool"
-    description = "This is a tool for generating audio for a text file content. It takes three inputs named `file_name`, `content` and the `language`. It converts the text to audio in selected language nd saves the file in mp3 format with name `file_name.mp3`."
+    description = "This is a tool for generating mp3 format audio for a text file content. It takes three inputs named `file_name`, `content` and the `language`. It converts the text to audio in selected language nd saves the file in mp3 format with name `file_name.mp3`."
     input = ["text", "text","text"]
     outputs = ["audio"]
 

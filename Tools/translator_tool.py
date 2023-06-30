@@ -39,7 +39,7 @@ def translate_text(text, target_lang, source_lang="en", max_chunk_length=512):
 
 class translate_my_text(Tool):
     name = "translate_text_tool"
-    description = "This is a tool for translating a text file content. It takes two inputs, first the file content as text, then the target language. It translates the content and returns the result as text"
+    description = "This is a tool for translating text content as `txt`. It takes two inputs, first the file content as text, then the target language. It translates the content and returns the result as text"
     input = ["text", "text"]
     output = ["text"]
 
