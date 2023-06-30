@@ -8,7 +8,7 @@ import bertSummarizer_tool as summarizer
 import question_generator as quizzer
 import translator_tool as translator
 import audio_generator as speaker
-
+from docx import Document
 
 # ---------------------------- login to huggingface hub and set up---------------------#
 token = st.secrets["hugging_face_token"]
@@ -33,14 +33,16 @@ def get_session_state():
 
 # Initialize session state
 session_state = get_session_state()
+if "url" not in session_state:
+    session_state.url = None 
 if "upload_file_url" not in session_state:
     session_state.upload_file_url = None
 if "set_download_clicked" not in session_state:
     session_state.set_download_clicked = False
 if "upload_from_web_clicked" not in session_state:
     session_state.upload_from_web_clicked = False
-if "summarised_clicked" not in session_state:
-    session_state.summarised_clicked = False
+if "summarized_clicked" not in session_state:
+    session_state.summarized_clicked = False
 if "translate_clicked" not in session_state:
     session_state.translate_clicked = False
 if "audio_clicked" not in session_state:
@@ -72,18 +74,26 @@ def set_translate_clicked():
     session_state.translate_clicked = True
 
 def set_summarized_clicked():
-    session_state.summarised_clicked = True
+    session_state.summarized_clicked = True
 
 def set_audio_clicked():
-    session_state.summarised_clicked = True
+    session_state.summarized_clicked = True
 
 def set_quiz_clicked():
     session_state.quiz_clicked = True
 
-def download(url):
-    file_name = agent.run(f"Download file from the web {url}", url=url)
-    print("---fileName", file_name)
-    session_state.file_name = file_name
+def write_to_file(content, file_name):
+    name = file_name.split('.pdf')[-1]
+    document = Document()
+    document.add_paragraph(content)
+    document.save(f'{name}.docx')
+
+def download():
+    if(session_state.url):
+        file_name = agent.run(f"Download file from the web {url}", url=session_state.url)
+        print("---fileName", file_name)
+        session_state.file_name = file_name
+        session_state.upload_file_clicked = False
 
 def read_content(file_name):
     context = agent.run(f"Read PDF content from {file_name}")
@@ -92,8 +102,16 @@ def read_content(file_name):
 def translate(file_content, target_language):
     session_state.file_translation = agent.run(f"Translate the text file content {file_content} to {target_language}")
 
-def summarize(file_content):
-    session_state.file_summary = agent.run(f"Summaries the text file content {file_content}")
+def summarize():
+    if(session_state.file_name !=None):
+        read_content(session_state.file_name)
+        if(session_state.file_content !=None):
+            file_content = session_state.file_content
+            session_state.file_summary = agent.run(f"Summaries the text file content {file_content}",file_content = session_state.file_content )
+            print("----",session_state.file_summary)
+            session_state.summarised_clicked = True
+        if (session_state.file_summary !=None):
+            write_to_file(session_state.file_summary, session_state.file_name)
 
 def generate_audio(file_content):
     session_state.file_voice = agent.run(f"Generate audio for a text file content {file_content}")
@@ -128,6 +146,8 @@ st.markdown(
 st.markdown("Currently, our platform exclusively supports PDF files at this stage.")
 url = st.empty()
 url = st.text_input("Enter a valid URL:")
+if(url !=None):
+    session_state.url = url
 
 col1, col2, col3, col4 = st.columns([0.4, 0.2, 0.3, 0.3])
 with col1:
@@ -136,19 +156,14 @@ with col2:
     pass
 with col3:
     upload_button = st.button("Upload From Web", on_click=set_upload_file_clicked)
-    session_state.upload_file_url = url
+
 with col4:
     download_file = st.button(
         label="Download PDF",
         disabled=not session_state.upload_from_web_clicked,
-        on_click= set_download_clicked
+        on_click= download() 
     )
-    # download_file = st.download_button(
-    #     label="DOWNLOAD FILE", data=url, file_name="original.pdf", mime="text/pdf"
-    # )
-    if url and download_file and upload_button and session_state.upload_from_web_clicked:    
-        download(url)    
-        st.write("Your file downloaded successfully")
+
 
 # --------------------------------------- Upload File -----------------------------------------#
 st.markdown(
@@ -182,18 +197,13 @@ with col1:
 with col2:
     pass
 with col3:
-    summarise_button = st.button("Summarize", on_click=set_summarized_clicked)
+    summarise_button = st.button("Summarize", on_click=summarize())
 with col4:
-    btn = st.download_button(
-        label="DOWNLOAD FILE", data="pdf", file_name=url, mime="text/pdf"
+    download_summary_button = st.button(
+        "Download Summary",
+        disabled =not session_state.summarized_clicked,
     )
-    # download_summary_button = st.button(
-    #     "Download Summary",
-    #     disabled=not session_state.summarised_clicked,
-    #     on_click=downloader(),
-    # )
-    if url and btn and session_state.summarised_clicked:
-        session_state.file_name = result
+
 st.divider()
 
 # --------------------------------------- Translate the content -----------------------------------------#
