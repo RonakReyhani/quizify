@@ -132,7 +132,7 @@ with col1:
 with col2:
     pass
 with col3:
-    st.button("Upload From Web", on_click=set_upload_file_clicked)
+    upload_button = st.button("Upload From Web", on_click=set_upload_file_clicked)
     session_state.upload_file_url = url
 with col4:
     download_file = st.button(
@@ -143,7 +143,7 @@ with col4:
     # download_file = st.download_button(
     #     label="DOWNLOAD FILE", data=url, file_name="original.pdf", mime="text/pdf"
     # )
-    if url and download_file and session_state.upload_from_web_clicked:        
+    if url and download_file and upload_button and session_state.upload_from_web_clicked:        
         st.write("Your file downloaded successfully")
 
 # --------------------------------------- Upload File -----------------------------------------#
