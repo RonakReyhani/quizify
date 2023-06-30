@@ -55,4 +55,4 @@ class question_generator(Tool):
         return generate_questions_with_answers(document, num_questions)
 
 
-questtion_generator_tool = question_generator()
+question_generator_tool = question_generator()

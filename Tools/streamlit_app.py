@@ -33,33 +33,68 @@ def get_session_state():
 
 # Initialize session state
 session_state = get_session_state()
-if "download_file_ready" not in session_state:
-    session_state.download_file_ready = False
+if "upload_from_web_clicked" not in session_state:
+    session_state.upload_from_web_clicked = False
 if "summarised_clicked" not in session_state:
     session_state.summarised_clicked = False
+if "translate_clicked" not in session_state:
+    session_state.translate_clicked = False
+if "audio_clicked" not in session_state:
+    session_state.audio_clicked = False
+if "quiz_clicked" not in session_state:
+    session_state.quiz_clicked = False
 if "file_name" not in session_state:
     session_state.file_name = None
 if "file_content" not in session_state:
     session_state.file_content = None
+if "target_language" not in session_state:
+    session_state.target_language = None
 if "file_translation" not in session_state:
     session_state.file_translation = None
 if "file_summary" not in session_state:
     session_state.file_summary = None
 if "file_voice" not in session_state:
     session_state.file_voice = None
+if "quiz_question_answers" not in session_state:
+    session_state.quiz_question_answers = None
 
 
 # --------------------------------------------------Helper functions---------------------------------#
-def set_clicked_upload_file():
-    session_state.download_file_ready = True
+def set_upload_file_clicked():
+    session_state.upload_from_web_clicked = True
 
+def set_translate_clicked():
+    session_state.translate_clicked = True
 
-def set_summarised_clicked():
+def set_summarized_clicked():
     session_state.summarised_clicked = True
 
+def set_audio_clicked():
+    session_state.summarised_clicked = True
+
+def set_quiz_clicked():
+    session_state.quiz_clicked = True
 
 def download(url):
-    return agent.run(f"Download file from the web {url}", url=url)
+    file_name = agent.run(f"Download file from the web {url}", url=url)
+    session_state.upload_from_web_clicked = False
+    session_state.file_name = file_name
+
+def read_content(file_name):
+    context = agent.run(f"Read PDF content from {file_name}")
+    session_state.file_content = context
+
+def translate(file_content, target_language):
+    session_state.file_translation = agent.run(f"Translate the text file content {file_content} to {target_language}")
+
+def summarize(file_content):
+    session_state.file_summary = agent.run(f"Summaries the text file content {file_content}")
+
+def generate_audio(file_content):
+    session_state.file_voice = agent.run(f"Generate audio for a text file content {file_content}")
+
+def generate_quiz(file_content):
+    session_state.quiz_question_answers = agent.run(f"Generating audio for a text file content {file_content}")
 
 
 # ----------------------------------------------------- Page Components ------------------------------------#
@@ -95,19 +130,17 @@ with col1:
 with col2:
     pass
 with col3:
-    upload_file_url = st.button("Upload From Web", on_click=set_clicked_upload_file)
+    upload_file_url = st.button("Upload From Web", on_click=set_upload_file_clicked)
 with col4:
-    # download_file = st.button(
-    #     label="Download PDF",
-    #     disabled=not session_state.download_file_ready,
-    # )
-    download_file = st.download_button(
-        label="DOWNLOAD FILE", data=url, file_name="original.pdf", mime="text/pdf"
+    download_file = st.button(
+        label="Download PDF",
+        disabled=not session_state.upload_from_web_clicked,
+        on_click=download
     )
-    if url and download_file and session_state.download_file_ready:
-        result = download(url)
-        session_state.download_file_ready = False
-        session_state.file_name = result
+    # download_file = st.download_button(
+    #     label="DOWNLOAD FILE", data=url, file_name="original.pdf", mime="text/pdf"
+    # )
+    if url and download_file and session_state.upload_from_web_clicked:        
         st.write("Your file downloaded successfully")
 
 # --------------------------------------- Upload File -----------------------------------------#

@@ -1,14 +1,14 @@
 # quizify
 
-A self Service study platform powered by Generative AI, using Hugging face Transformers.
+A self service study platform powered by Generative AI, using Hugging face Transformers.
 
 ## Introduction
 
-The ` Self-Service Learning platform` is an innovative app designed to revolutionize your learning experience. With this powerful tool, users can effortlessly generate custom quizzes based on any PDF file they download from the web.\nGone are the days of tedious manual summarization and translation! Our app leverages the cutting-edge capabilities of Hugging Face transformers to simplify the entire process. Once you've obtained a PDF, simply import it into the app and watch as the magic unfolds.
+The ` Self-Service Learning platform` is an innovative app designed to revolutionize your learning experience. With this powerful tool, users can effortlessly generate custom quizzes based on any PDF file they download from the web. Gone are the days of tedious manual summarization and translation! Our app leverages the cutting-edge capabilities of Hugging Face transformers to simplify the entire process. Once you've obtained a PDF, simply import it into the app and watch as the magic unfolds.
 
-This learning platform empowers you to summarize the document with ease, condensing its key points into a concise format. Not only that, but our app also offers built-in translation functionality, allowing you to understand the content in your preferred language.\n But the true power of our app lies in its ability to transform your summarized and translated document into an interactive question-answer service.
+This learning platform empowers you to summarize the document with ease, condensing its key points into a concise format. Not only that, but our app also offers built-in translation functionality, allowing you to understand the content in your preferred language. But the true power of our app lies in its ability to transform your summarized and translated document into an interactive question-answer service.
 
-By analyzing the text and extracting relevant information, the app generates thought-provoking questions that test your understanding of the material.\n Whether you're a student striving for academic excellence or a professional looking to enhance your knowledge, the Self Service Quiz Generator platform is your go-to tool for efficient and engaging learning. Experience the convenience, accuracy, and effectiveness of our app today and take your learning journey to new heights.
+By analyzing the text and extracting relevant information, the app generates thought-provoking questions that test your understanding of the material. Whether you're a student striving for academic excellence or a professional looking to enhance your knowledge, the Self Service Quiz Generator platform is your go-to tool for efficient and engaging learning.
 
 ## Sub Services
 

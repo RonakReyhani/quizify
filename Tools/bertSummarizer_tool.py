@@ -1,5 +1,4 @@
 from transformers import BartTokenizer, BartForConditionalGeneration
-from readPDF import read_pdf
 from transformers import pipeline
 import re
 from transformers import Tool

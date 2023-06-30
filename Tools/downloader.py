@@ -6,8 +6,6 @@ def downloader(url):
   # NOTE the stream=True parameter below
   file_name = url.split('/')[-1]
   print(file_name)
-  # # file_type=".pdf"
-  # file= '{}{}'.format(file_name, file_type)
   with requests.get(url, stream=True) as r:
       r.raise_for_status()
       with open(file_name, 'wb') as f:
