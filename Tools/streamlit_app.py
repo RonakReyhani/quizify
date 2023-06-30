@@ -132,8 +132,8 @@ with col1:
 with col2:
     pass
 with col3:
-    url = st.button("Upload From Web", on_click=set_upload_file_clicked)
-    session_state.upload_file_url(url)
+    st.button("Upload From Web", on_click=set_upload_file_clicked)
+    session_state.upload_file_url = url
 with col4:
     download_file = st.button(
         label="Download PDF",
