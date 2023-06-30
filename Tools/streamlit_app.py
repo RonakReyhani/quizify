@@ -175,7 +175,7 @@ with col1:
 with col2:
     pass
 with col3:
-    summarise_button = st.button("Summarize", on_click=set_summarised_clicked)
+    summarise_button = st.button("Summarize", on_click=set_summarized_clicked)
 with col4:
     btn = st.download_button(
         label="DOWNLOAD FILE", data="pdf", file_name=url, mime="text/pdf"
