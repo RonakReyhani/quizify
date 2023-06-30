@@ -35,6 +35,8 @@ def get_session_state():
 session_state = get_session_state()
 if "upload_file_url" not in session_state:
     session_state.upload_file_url = None
+if "set_download_clicked" not in session_state:
+    session_state.set_download_clicked = False
 if "upload_from_web_clicked" not in session_state:
     session_state.upload_from_web_clicked = False
 if "summarised_clicked" not in session_state:
@@ -64,7 +66,8 @@ if "quiz_question_answers" not in session_state:
 # --------------------------------------------------Helper functions---------------------------------#
 def set_upload_file_clicked():
     session_state.upload_from_web_clicked = True
-
+def set_download_clicked():
+    session_state.set_download_clicked = True
 def set_translate_clicked():
     session_state.translate_clicked = True
 
@@ -138,12 +141,13 @@ with col4:
     download_file = st.button(
         label="Download PDF",
         disabled=not session_state.upload_from_web_clicked,
-        on_click=download(url)
+        on_click= set_download_clicked
     )
     # download_file = st.download_button(
     #     label="DOWNLOAD FILE", data=url, file_name="original.pdf", mime="text/pdf"
     # )
-    if url and download_file and upload_button and session_state.upload_from_web_clicked:        
+    if url and download_file and upload_button and session_state.upload_from_web_clicked:    
+        download(url)    
         st.write("Your file downloaded successfully")
 
 # --------------------------------------- Upload File -----------------------------------------#
